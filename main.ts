@@ -1,4 +1,4 @@
-// deno-lint-ignore-file no-import-prefix
+// deno-lint-ignore-file no-import-prefix ban-unused-ignore
 import { parse, resolve } from "jsr:@std/path@1.1.6";
 
 const arg = Deno.args[0] ?? "";
