@@ -16,7 +16,12 @@ const downloadsDir = Deno.realPathSync(resolve(home, "storage", "downloads"));
 if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     const newFolder = resolve(parsed.dir, parsed.name);
     new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg, "-aos" ] }).spawn();
-    Deno.removeSync(resolve(downloadsDir, parsed.base));
+    try {
+        Deno.removeSync(resolve(downloadsDir, parsed.base));
+    } catch (err: any) {
+        console.log(err);
+        console.log("the archive was not in download so it was not removed");
+    }
 }
 
 console.log("file should be .zip, .rar or .7z");
