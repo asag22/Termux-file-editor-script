@@ -5,7 +5,8 @@ import * as path from "jsr:@std/path@1.1.6";
 const arg = Deno.args[0] ?? "";
 const parsed = path.parse(arg);
 
-let storage = path.parse("~/storage/downloads");
+let storage = path.parse(path.resolve("~/storage/downloads"));
+
 
 console.log(storage.dir);
 console.log(path.resolve(storage.dir));
