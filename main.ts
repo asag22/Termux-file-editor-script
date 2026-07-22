@@ -1,9 +1,9 @@
 // deno-lint-ignore-file no-import-prefix ban-unused-ignore
 // import { parse, resolve } from "jsr:@std/path@1.1.6";
-import * as path from "jsr:@std/path@1.1.6";
+import {resolve, parse} from "jsr:@std/path@1.1.6";
 
 const arg = Deno.args[0] ?? "";
-const parsed = path.parse(arg);
+const parsed = parse(arg);
 
 const home = Deno.env.get("HOME");
 if(!home){
@@ -11,12 +11,12 @@ if(!home){
     Deno.exit();
 }
 
-const downloadsDir = Deno.realPathSync(path.resolve(home, "storage", "downloads"));
+const downloadsDir = Deno.realPathSync(resolve(home, "storage", "downloads"));
 
 if([".zip", ".rar", ".7z"].includes(parsed.ext)){
-    const newFolder = path.resolve(parsed.dir, parsed.name);
+    const newFolder = resolve(parsed.dir, parsed.name);
     new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg, "-aos" ] }).spawn();
-    Deno.removeSync(path.resolve(downloadsDir, parsed.base));
+    Deno.removeSync(resolve(downloadsDir, parsed.base));
 }
 
 console.log("file should be .zip, .rar or .7z");
