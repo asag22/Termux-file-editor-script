@@ -12,13 +12,11 @@ if(!home){
 }
 
 const downloadsDir = Deno.realPathSync(path.resolve(home, "storage", "downloads"));
-Deno.readDirSync(downloadsDir).forEach((entry) => {
-    console.log(entry.name);
-});
 
 if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     const newFolder = path.resolve(parsed.dir, parsed.name);
-    new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg ] }).spawn();
+    new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg, "-aos" ] }).spawn();
+    Deno.removeSync(path.resolve(downloadsDir, parsed.base));
 }
 
 console.log("file should be .zip, .rar or .7z");
