@@ -15,7 +15,7 @@ const downloadsDir = Deno.realPathSync(resolve(home, "storage", "downloads"));
 
 if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     const newFolder = resolve(parsed.dir, parsed.name);
-    await new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg, "-aos" ], stderr: "null", stdin: "null", stdout: "null" }).spawn().output();
+    await new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg, "-aos" ], stderr: "piped", stdin: "piped", stdout: "piped" }).spawn().output();
     try {
         Deno.removeSync(resolve(downloadsDir, parsed.base));
     } catch (err: any) {
