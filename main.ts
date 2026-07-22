@@ -19,8 +19,7 @@ if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     try {
         Deno.removeSync(resolve(downloadsDir, parsed.base));
     } catch (err: any) {
-        console.log(err);
-        console.log("the archive was not in download so it was not removed");
+        console.log("the archive was not in downloads so it was not removed");
         confirm("ok?");
     }
 }
