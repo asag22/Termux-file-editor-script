@@ -11,10 +11,10 @@ if(!home){
     Deno.exit();
 }
 
-let storage = path.parse(home);
+const denoHome = Deno.realPathSync("~/storage");
+console.log(denoHome);
 
-console.log(storage);
-console.log(path.resolve(storage.dir));
+const downloadsDir = path.resolve(home, "storage", "downloads");
 
 
 if([".zip", ".rar", ".7z"].includes(parsed.ext)){
