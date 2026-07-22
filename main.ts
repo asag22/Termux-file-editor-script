@@ -17,6 +17,7 @@ if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     const newFolder = resolve(parsed.dir, parsed.name);
     new Deno.Command("7z", { args: [ "x", `-o${newFolder}`, arg, "-aos" ] }).spawn();
     Deno.removeSync(resolve(downloadsDir, parsed.base));
+    new Deno.Command("am", { args: [ "start", "-a android.intent.action.MAIN", "-c android.intent.category.LAUNCHER", "me.zhanghai.android.files"]}).spawn();
 }
 
 console.log("file should be .zip, .rar or .7z");
