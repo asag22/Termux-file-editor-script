@@ -21,6 +21,7 @@ if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     } catch (err: any) {
         console.log(err);
         console.log("the archive was not in download so it was not removed");
+        confirm("ok?");
     }
 }
 
