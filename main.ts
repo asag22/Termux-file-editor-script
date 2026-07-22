@@ -11,7 +11,7 @@ if(!home){
     Deno.exit();
 }
 
-const denoHome = Deno.realPathSync("~/storage");
+const denoHome = Deno.realPathSync(`${home}/storage`);
 console.log(denoHome);
 
 const downloadsDir = path.resolve(home, "storage", "downloads");
