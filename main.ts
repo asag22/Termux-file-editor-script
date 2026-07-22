@@ -12,7 +12,9 @@ if(!home){
 }
 
 const downloadsDir = Deno.realPathSync(path.resolve(home, "storage", "downloads"));
-console.log(downloadsDir);
+Deno.readDirSync(downloadsDir).forEach((entry) => {
+    console.log(entry.name);
+});
 
 if([".zip", ".rar", ".7z"].includes(parsed.ext)){
     const newFolder = path.resolve(parsed.dir, parsed.name);
