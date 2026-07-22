@@ -13,7 +13,7 @@ if(!home){
 
 let storage = path.parse(home);
 
-console.log(storage.dir);
+console.log(storage);
 console.log(path.resolve(storage.dir));
 
 
